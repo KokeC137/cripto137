@@ -12,8 +12,8 @@ class AnalisysBollinger:
         self.multiplicador = multiplicador
 
     def add_bollinger(self):
-        if len(self.ohlc_data) < 20:
-            raise ValueError("Se requieren al menos 20 períodos para calcular las bandas.")
+        if len(self.ohlc_data) < self.periodos:
+            raise ValueError(f"Se requieren al menos {self.periodos} períodos para calcular las bandas.")
 
         # creamos una lista con los valores necesarios para calcular la banda en cada período
         bollinger_data = []
@@ -57,21 +57,10 @@ class AnalisysBollinger:
         now_f = now.strftime('%Y-%m-%d %H:%M:%S')
         funciones.lineprint(now_f)
 
-        if len(bollinger_data) != 700:
-            raise ValueError (f"Error: La longitud de la lista debe ser {700}, pero es {len(bollinger_data)}.")
+        correct_size = 720-self.periodos
 
-        # # Bucle elaborado para el print de los datos, mejor hacemos un dataframe
-        # for b in bollinger_data[:5]:
-        #     fecha = datetime.fromtimestamp(b[0], tz=timezone.utc)
-        #     # Formatear la fecha en el formato deseado (por ejemplo, "YYYY-MM-DD HH:MM:SS+00:00")
-        #     fecha_f = fecha.strftime('%Y-%m-%d %H:%M:%S')
-        #     print(fecha_f,b[1:])
-        # print("---------")
-        # for b in bollinger_data[-5:]:
-        #     fecha = datetime.fromtimestamp(b[0], tz=timezone.utc)
-        #     # Formatear la fecha en el formato deseado (por ejemplo, "YYYY-MM-DD HH:MM:SS+00:00")
-        #     fecha_f = fecha.strftime('%Y-%m-%d %H:%M:%S')
-        #     print(fecha_f,b[1:])
+        if len(bollinger_data) != correct_size:
+            raise ValueError (f"Error: La longitud de la lista debe ser {correct_size}, pero es {len(bollinger_data)}.")
 
         # Convertir a DataFrame de pandas
         df = pd.DataFrame(bollinger_data,

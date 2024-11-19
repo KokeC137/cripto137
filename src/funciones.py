@@ -13,5 +13,5 @@ def lineprint(msg, targetlen = 72):
     return
 
 def now():
-    utc_now = datetime.datetime.now(datetime.UTC)
+    utc_now = datetime.datetime.now(datetime.timezone.utc)
     return utc_now
