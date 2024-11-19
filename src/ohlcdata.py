@@ -22,24 +22,16 @@ class OhlcData:
             ret = k.query_public('OHLC', params)
             bars = ret['result'][self.pair]
 
-            # funciones.lineprint(funciones.now())
-            # print(len(bars))
-            # for b in bars[:5]:
-            #     print(b)
-            # print("---------")
-            # for b in bars[-5:]:
-            #     print(b)
-
             # actualizamos 'since'
             self.since = ret['result']['last']
             params['since'] = self.since
             return bars
 
         except KeyError as e:
-            # st.error(f"Error al obtener los datos de kraken.API: {e}")
+            st.error(f"Error al obtener los datos de kraken.API: {e}")
             print(e)
         except Exception as e:
-            # st.error(f"Ha ocurrido un error: {e}")
+            st.error(f"Ha ocurrido un error: {e}")
             print(e)
 
     def data_update(self):

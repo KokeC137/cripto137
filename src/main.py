@@ -15,6 +15,9 @@ period = st.selectbox("Elige el período de análisis para las bandas de Bolling
 multiplicador = st.selectbox("Elige el multiplicador de análisis para las bandas de Bollinger", ["2", "1", "2.5", "3"])
 size = st.selectbox("Elige el tamaño de la muestra a graficar", ["500", "100", "300", "700"])
 
+if period == "200" and size == "100":
+    st.error(f"Por la estructuración del código, no es posible graficar con un periodo de {period} y una muestra de {size} elementos. Prueba con el resto.")
+
 # Crear un contenedor para el gráfico
 graph_container = st.empty()
 
