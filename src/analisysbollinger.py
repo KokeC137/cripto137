@@ -57,8 +57,8 @@ class AnalisysBollinger:
         now_f = now.strftime('%Y-%m-%d %H:%M:%S')
         funciones.lineprint(now_f)
 
+        # Introducimos un error para verificar que la dimensión de la lista es la que corresponde
         correct_size = 720-self.periodos
-
         if len(bollinger_data) != correct_size:
             raise ValueError (f"Error: La longitud de la lista debe ser {correct_size}, pero es {len(bollinger_data)}.")
 
@@ -66,21 +66,16 @@ class AnalisysBollinger:
         df = pd.DataFrame(bollinger_data,
                           columns=["Unix_Date", "Open", "High", "Low", "Close", "central_band", "upper_band",
                                    "lower_band", "Signal"])
-
         # Convertir la columna "Fecha Unix" de Unix a formato UTC
         df['Fecha'] = pd.to_datetime(df['Unix_Date'], unit='s', utc=True).dt.strftime('%Y-%m-%d %H:%M:%S')
-
         # Eliminar la columna original "Fecha Unix" que no es necesaria ahora
         df = df.drop(columns=["Unix_Date"])
-
         # Reorganizar las columnas para que "Fecha" sea la primera columna
         df = df[["Fecha", "Open", "High", "Low", "Close", "central_band", "upper_band", "lower_band", "Signal"]]
 
         # Imprimir los primeros 5 registros con los encabezados
         print(df.head())
-
         print("\n---------")
-
         # Imprimir los últimos 5 registros con los encabezados
         print(df.tail())
 

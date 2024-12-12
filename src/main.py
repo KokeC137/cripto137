@@ -33,9 +33,9 @@ if st.button("Detener"):
 def run_bucle():
     data = OhlcData(pair, "1499000000")  # UTC 2017-07-02 12:53:20
     first_time = True
-    ohlc_data = []
     iforshow = 700 - int(size) + 1
 
+    ohlc_data = []
     while st.session_state.running:  # Solo corre si running es True
         if first_time:
             download = data.data_download()
