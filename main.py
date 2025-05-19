@@ -1,9 +1,9 @@
 import time
 import streamlit as st
 
-from ohlcdata import OhlcData
-from analisysbollinger import AnalisysBollinger
-from ploteo_data import ploteo_data
+from src.ohlcdata import OhlcData
+from src.analisysbollinger import AnalisysBollinger
+from src.ploteo_data import ploteo_data
 
 # Crear una bandera de control en session_state
 if 'running' not in st.session_state:
