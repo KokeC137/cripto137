@@ -1,5 +1,5 @@
 import numpy as np
-import funciones
+from src import funciones
 import pandas as pd
 
 # class     --> datos Bandas de Bollinger
